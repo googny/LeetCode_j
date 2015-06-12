@@ -24,46 +24,26 @@ import java.util.Map;
 public class IsomorphicStrings {
 
     public static void main(String[] args) {
-        System.out.println(new IsomorphicStrings().isIsomorphic("", ""));
+        System.out.println(new IsomorphicStrings().isIsomorphic("ab", "aa"));
+
     }
 
     public boolean isIsomorphic(String s, String t) {
-        int slen = s.length();
-        int tlen = t.length();
-
-        if(s.equals(t)){
-            return true;
-        }
-
-        if (slen != tlen) {
-            return false;
-        }
-
-        Map<Character, Integer> sMap = new HashMap<>();
-        Map<Character, Integer> tMap = new HashMap<>();
-        boolean hasRepeat = false;
-        for (int i = 0; i < slen; i++) {
-            char sch = s.charAt(i);
-            char tch = t.charAt(i);
-
-            Integer sValue = sMap.get(sch);
-            Integer tValue = tMap.get(tch);
-
-            if (sValue == null && tValue == null) {// 都为null
-                sMap.put(sch, i);
-                tMap.put(tch, i);
-            } else if ((sValue == null) ^ (tValue == null)) { // 其中一个为null
+        Map<Character, Character> sMap = new HashMap<>();
+        Map<Character, Character> tMap = new HashMap<>();
+        int len = s.length();
+        for (int i = 0; i < len; i++) {
+            Character sch = s.charAt(i);
+            Character tch = t.charAt(i);
+            Character sValue = sMap.get(sch);
+            Character tValue = tMap.get(tch);
+            if (sValue == null && tValue == null) {
+                sMap.put(sch, tch);
+                tMap.put(tch, sch);
+            } else if (sValue != tch || tValue != sch) {
                 return false;
-            } else if (sValue != tValue) { // 都不为null
-                return false;
-            } else {
-                hasRepeat = true;
             }
         }
-        if(slen > 2){
-            return hasRepeat;
-        }else {
-            return true;
-        }
+        return true;
     }
 }
