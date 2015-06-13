@@ -9,7 +9,7 @@ package hashtable.easy;
 public class CountPrimes {
 
     public static void main(String[] args) {
-        System.out.println(new CountPrimes().countPrimes(2));
+        System.out.println(new CountPrimes().countPrimes(1000000));
     }
 
     public int countPrimes(int n) {
