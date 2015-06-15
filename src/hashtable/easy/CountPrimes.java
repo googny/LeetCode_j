@@ -3,13 +3,33 @@ package hashtable.easy;
 /**
  * Count the number of prime numbers less than a non-negative number, n.
  *
- * @author mti1301
+ * @author Googny
  * @since 2015/6/12.
  */
 public class CountPrimes {
 
+
+    public static void main(String[] args) {
+        System.out.println(new CountPrimes().countPrimes(1000000));
+    }
+
     public int countPrimes(int n) {
-        // 首先，你最先想到的肯定是最慢的，一个个遍历呗，这个不是我想要的，所以就不写了
-        return 0;
+        boolean[] isPrime = new boolean[n + 1];
+        for (int i = 2; i < n; ++i) {
+            isPrime[i] = true;
+        }
+        for (int i = 2; i * i < n; ++i) {
+            if (!isPrime[i]) continue;
+            for (int j = i * i; j <= n; j += i) {
+                isPrime[j] = false;
+            }
+        }
+        int count = 0;
+        for (int i = 2; i < n; i++) {
+            if (isPrime[i]) {
+                ++count;
+            }
+        }
+        return count;
     }
 }

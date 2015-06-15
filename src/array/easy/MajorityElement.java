@@ -16,12 +16,12 @@ import java.util.Set;
 public class MajorityElement {
     public static void main(String[] args) {
         int[] nums = {1, 2, 3, 4, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6};
-        int key = 0;
-        for(int elem:nums){
-            key ^=elem;
-        }
-        System.out.println(key);
-//        System.out.println(new MajorityElement().majorityElement(nums));
+//        int key = 0;
+//        for(int elem:nums){
+//            key ^=elem;
+//        }
+//        System.out.println(key);
+        System.out.println(new MajorityElement().majorityElement(nums));
     }
 
     public int majorityElement(int[] nums) {
