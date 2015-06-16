@@ -3,21 +3,21 @@ package array.medium;
 /**
  * Follow up for "Remove Duplicates":
  * What if duplicates are allowed at most twice?
- * <p>
+ * <p/>
  * For example,
  * Given sorted array nums = [1,1,1,2,2,3],
- * <p>
+ * <p/>
  * Your function should return length = 5,
  * with the first five elements of nums being 1, 1, 2, 2 and 3.
  * It doesn't matter what you leave beyond the new length.
  *
- * @author googny
- * @since 2015/6/15
+ * @author mti1301
+ * @since 2015/6/15.
  */
 public class RemoveDuplicatesFromSortedArrayII {
-
     public static void main(String[] args) {
-        int[] nums = {1, 1, 1, 2, 2, 3};
+//        int[] nums = {1, 1, 2};
+        int[] nums = {1, 1, 1, 2, 3, 3, 3, 4, 4};
         System.out.println(new RemoveDuplicatesFromSortedArrayII().removeDuplicates(nums));
     }
 
@@ -28,19 +28,28 @@ public class RemoveDuplicatesFromSortedArrayII {
         }
         int i = 0;
         int j = i + 1;
+        int interval = 1;
+
         while (j < len) {
             if (nums[i] == nums[j]) {
-                if (j - i >= 2) {
-                    nums[i + 2] = nums[j+1];
-                } else {
-                    j++;
+                nums[i + 1] = nums[j]; // 挨个儿前移
+                interval++;
+                j++;
+                if (j == len) {
+                    i++;
                 }
             } else {
-
-                i++;
-                j++;
+                if (interval > 1) { // 间隔大于1的i+2
+                    interval = 1;
+                    i += 2;
+                    nums[i] = nums[j++];
+                } else { // 间隔等于1的i+1
+                    interval = 1;
+                    nums[++i] = nums[j++];
+                }
             }
         }
-        return i;
+//        System.out.println(Arrays.toString(nums));
+        return i + 1;
     }
 }
