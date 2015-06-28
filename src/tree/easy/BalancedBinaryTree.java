@@ -23,7 +23,7 @@ public class BalancedBinaryTree {
     }
 
     public TreeNode buildTree(Integer[] levelNums) {
-        Queue<TreeNode> queue = new LinkedList<>();
+        Queue<TreeNode> queue = new LinkedList();
         TreeNode root = new TreeNode(levelNums[0]);
         queue.add(root);
         for (int i = 1; i < levelNums.length; i += 2) {
