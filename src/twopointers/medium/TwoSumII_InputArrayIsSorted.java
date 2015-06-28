@@ -16,11 +16,12 @@ import java.util.Arrays;
  */
 public class TwoSumII_InputArrayIsSorted {
     public static void main(String[] args) {
-        int[] nums = {1, 2, 3, 5, 6, 8, 9, 10};
-        System.out.println(Arrays.toString(new TwoSumII_InputArrayIsSorted().twoSum(nums, 19)));
+        int[] nums = {9, 1, 2, 3, 5, 6, 8, 10};
+        System.out.println(Arrays.toString(new TwoSumII_InputArrayIsSorted().twoSum_BinarySearch(nums, 19)));
     }
 
-    public int[] twoSum(int[] numbers, int target) {
+    // Two Pointers  O(n) runtime O(1) space
+    public int[] twoSum_2Pointers(int[] numbers, int target) {
         int low = 0;
         int high = numbers.length - 1;
 
@@ -28,15 +29,38 @@ public class TwoSumII_InputArrayIsSorted {
             if (numbers[low] + numbers[high] == target) {
                 return new int[]{low + 1, high + 1}; // index1 and index2 not zero-based
             } else if (numbers[low] + numbers[high] < target) {
-                do {
-                    low++;
-                } while (low < high && numbers[low - 1] == numbers[low]);
+                while (++low < high && numbers[low - 1] == numbers[low]) ;
             } else {
-                do {
-                    high--;
-                } while (low < high && numbers[high + 1] == numbers[high]);
+                while (low < --high && numbers[high + 1] == numbers[high]) ;
             }
         }
-        return new int[0];
+        throw new IllegalStateException("error state");
+    }
+
+
+    // Binary Search runtime o(n*log(n)) space o(1)
+    public int[] twoSum_BinarySearch(int[] nums, int target) {
+        for (int i = 0; i < nums.length; i++) {
+            int x = nums[i];
+            int re = binarySearch(nums, i + 1, target - x);
+            if (-1 != re) {
+                return new int[]{i + 1, re + 1};
+            }
+        }
+        throw new IllegalStateException("error state");
+    }
+
+    private int binarySearch(int[] nums, int start, int target) {
+        int end = nums.length - 1;
+        int mid;
+        while (start < end) {
+            mid = (end + start) / 2;
+            if (nums[mid] > target) {
+                end = mid;
+            } else {
+                start = mid + 1;
+            }
+        }
+        return (start == end && nums[start] == target) ? start : -1;
     }
 }

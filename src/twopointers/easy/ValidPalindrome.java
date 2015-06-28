@@ -2,14 +2,14 @@ package twopointers.easy;
 
 /**
  * Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
- * <p>
+ * <p/>
  * For example,
  * "A man, a plan, a canal: Panama" is a palindrome.
  * "race a car" is not a palindrome.
- * <p>
+ * <p/>
  * Note:
  * Have you consider that the string might be empty? This is a good question to ask during an interview.
- * <p>
+ * <p/>
  * For the purpose of this problem, we define empty string as valid palindrome.
  *
  * @author googny
@@ -40,12 +40,11 @@ public class ValidPalindrome {
             while (left < right && !Character.isLetterOrDigit(s.charAt(right))) {
                 right--;
             }
-            if (s.charAt(left) == s.charAt(right)) {
-                left++;
-                right--;
-            } else {
+            if (s.charAt(left) != s.charAt(right)) {
                 return false;
             }
+            left++;
+            right--;
         }
         return true;
     }

@@ -2,7 +2,7 @@ package twopointers.easy;
 
 /**
  * Implement strStr().
- * <p>
+ * <p/>
  * Returns the index of the first occurrence of needle in haystack,
  * or -1 if needle is not part of haystack.
  *
@@ -12,7 +12,7 @@ package twopointers.easy;
 public class ImplementstrStr {
 
     public static void main(String[] args) {
-        String haystack = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaba";
+        String haystack = "aba";
         String needle = "ba";
         System.out.println(new ImplementstrStr().strStr(haystack, needle));
     }
@@ -28,18 +28,29 @@ public class ImplementstrStr {
             while (j < nLen) {
                 if (haystack.charAt(i) != needle.charAt(j)) {
                     break;
-                } else {
-                    i++;
-                    j++;
                 }
+                i++;
+                j++;
             }
             if (j == nLen) {
                 firstOcc = i - nLen;
                 return firstOcc;
             } else {
+                // 退回 j 步
                 i -= j;
             }
         }
         return firstOcc;
+    }
+
+    // 优雅的解法
+    public int strStr_good(String haystack, String needle) {
+        for (int i = 0; ; i++) {
+            for (int j = 0; ; j++) {
+                if (j == needle.length()) return i;
+                if (i + j == haystack.length()) return -1;
+                if (needle.charAt(j) != haystack.charAt(i + j)) break;
+            }
+        }
     }
 }
