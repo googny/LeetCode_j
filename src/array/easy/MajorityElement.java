@@ -57,7 +57,6 @@ public class MajorityElement {
             } else if (major == num[i]) {
                 count++;
             } else count--;
-
         }
         return major;
     }
