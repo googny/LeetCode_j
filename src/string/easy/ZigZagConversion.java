@@ -13,16 +13,26 @@ package string.easy;
  * string convert(string text, int nRows);
  * convert("PAYPALISHIRING", 3) should return "PAHNAPLSIIGYIR".
  *
- * @author googny
- * @since 2015/6/22
+ * @author mti1301
+ * @since 2015/6/23.
  */
 public class ZigZagConversion {
+    public static void main(String[] args) {
+        String s = "PAYPALISHIRING";
+        System.out.println(new ZigZagConversion().convert(s, 3));
+    }
+
     public String convert(String s, int numRows) {
         int len = s.length();
-        StringBuffer buffer = new StringBuffer();
-        for (int i = 0; i < len; i++) {
+        int zagLen = (int) Math.ceil(len / numRows);
 
+        StringBuffer buffer = new StringBuffer();
+
+        for (int j = 0; j < numRows; j++) {
+            for (int i = 0; i < zagLen; i++) {
+                buffer.append(s.charAt(i * numRows + j));
+            }
         }
-        return null;
+        return buffer.toString();
     }
 }

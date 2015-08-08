@@ -46,25 +46,18 @@ public class MajorityElement {
         return 0;
     }
 
-    public int majorityElement1(int[] nums) {
-        int len = nums.length;
-        Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < len; i++) {
-            Integer value = map.get(nums[i]);
-            if (value != null) {
-                value++;
-                map.put(nums[i], value);
-            } else {
-                map.put(nums[i], 1);
-            }
+    //Boyer-Moore Majority Vote Algorithm
+    public int majorityElement_fastest(int[] num) {
+
+        int major = num[0], count = 1;
+        for (int i = 1; i < num.length; i++) {
+            if (count == 0) {
+                count++;
+                major = num[i];
+            } else if (major == num[i]) {
+                count++;
+            } else count--;
         }
-        Set<Integer> keys = map.keySet();
-        for (Integer key : keys) {
-            Integer value = map.get(key);
-            if (value > len / 2) {
-                return key;
-            }
-        }
-        return 0;
+        return major;
     }
 }
